@@ -10,8 +10,6 @@ on:
       - "docs/**"
       - "README.md"
       - "README.en.md"
-      - ".github/workflows/**"
-      - ".github/**"
   pull_request:
     branches:
       - main
