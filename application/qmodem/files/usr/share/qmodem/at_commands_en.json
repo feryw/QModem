@@ -459,6 +459,110 @@
             {
                 "Restart Module > AT+CFUN=15": "AT+CFUN=15"
             }
+        ],
+        "intel": [
+            {
+                "Query Firmware Version > ATI8": "ATI8"
+            },
+            {
+                "Query IMEI > AT+CGSN": "AT+CGSN"
+            },
+            {
+                "Query IMSI > AT+CIMI": "AT+CIMI"
+            },
+            {
+                "Query Signal (RSRQ/RSRP) > AT+XCESQ?": "AT+XCESQ?"
+            },
+            {
+                "Query Signal (RSSI) > AT+CSQ?": "AT+CSQ?"
+            },
+            {
+                "Query Current Band > AT+XCCINFO?": "AT+XCCINFO?"
+            },
+            {
+                "Query CA Band > AT+GTCAINFO?": "AT+GTCAINFO?"
+            },
+            {
+                "Query Current Mode > AT+XACT?": "AT+XACT?"
+            },
+            {
+                "Query Port Mode > AT+GTUSBMODE?": "AT+GTUSBMODE?"
+            },
+            {
+                "NCM Mode > AT+GTUSBMODE=0": "AT+GTUSBMODE=0"
+            },
+            {
+                "MBIM Mode > AT+GTUSBMODE=7": "AT+GTUSBMODE=7"
+            },
+            {
+                "LTE Only All Band > AT+XACT=2,,,0": "AT+XACT=2,,,0"
+            },
+            {
+                "WCDMA Only All Band > AT+XACT=1,,,0": "AT+XACT=1,,,0"
+            },
+            {
+                "WCDMA + LTE All Band > AT+XACT=4,,,0": "AT+XACT=4,,,0"
+            },
+            {
+                "Lock B1 > AT+XACT=2,,,101": "AT+XACT=2,,,101"
+            },
+            {
+                "Lock B3 > AT+XACT=2,,,103": "AT+XACT=2,,,103"
+            },
+            {
+                "Lock B8 > AT+XACT=2,,,108": "AT+XACT=2,,,108"
+            },
+            {
+                "Lock B40 > AT+XACT=2,,,140": "AT+XACT=2,,,140"
+            },
+            {
+                "Lock B1+B3 > AT+XACT=2,,,101,103": "AT+XACT=2,,,101,103"
+            },
+            {
+                "Lock B1+B8 > AT+XACT=2,,,101,108": "AT+XACT=2,,,101,108"
+            },
+            {
+                "Lock B3+B8 > AT+XACT=2,,,103,108": "AT+XACT=2,,,103,108"
+            },
+            {
+                "Lock B1+B40 > AT+XACT=2,,,101,140": "AT+XACT=2,,,101,140"
+            },
+            {
+                "Lock B3+B40 > AT+XACT=2,,,103,140": "AT+XACT=2,,,103,140"
+            },
+            {
+                "Lock B8+B40 > AT+XACT=2,,,108,140": "AT+XACT=2,,,108,140"
+            },
+            {
+                "Lock B1+B3+B8 > AT+XACT=2,,,101,103,108": "AT+XACT=2,,,101,103,108"
+            },
+            {
+                "Lock B1+B3+B40 > AT+XACT=2,,,101,103,140": "AT+XACT=2,,,101,103,140"
+            },
+            {
+                "Lock B1+B8+B40 > AT+XACT=2,,,101,108,140": "AT+XACT=2,,,101,108,140"
+            },
+            {
+                "Lock B3+B8+B40 > AT+XACT=2,,,103,108,140": "AT+XACT=2,,,103,108,140"
+            },
+            {
+                "Lock B1+B3+B8+B40 > AT+XACT=2,,,101,103,108,140": "AT+XACT=2,,,101,103,108,140"
+            },
+            {
+                "Enable Airplane Mode > AT+CFUN=4": "AT+CFUN=4"
+            },
+            {
+                "Disable Airplane Mode > AT+CFUN=1": "AT+CFUN=1"
+            },
+            {
+                "Query Error > AT+XEER": "AT+XEER"
+            },
+            {
+                "Query Voltage > AT+CBC": "AT+CBC"
+            },
+            {
+                "Restart Module > AT+CFUN=15": "AT+CFUN=15"
+            }
         ]
     },
     "meig": {

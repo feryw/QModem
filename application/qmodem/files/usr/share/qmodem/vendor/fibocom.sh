@@ -69,6 +69,13 @@ get_mode()
                     mode="mbim" ;;
             esac
         ;;
+        "intel")
+            case "$mode_num" in
+                "0") mode="ncm" ;;
+                "7") mode="mbim" ;;
+                *) mode="$mode_num" ;;
+            esac
+        ;;
         *)
             mode="$mode_num"
         ;;
@@ -127,6 +134,13 @@ set_mode()
                     *) mode_num="32" ;;
                 esac
             ;;
+        "intel")
+            case "$mode_config" in
+                "ncm") mode_num="0" ;;
+                "mbim") mode_num="7" ;;
+                *) mode_num="0" ;;
+            esac
+        ;;
         *)
             mode_num="32"
         ;;
@@ -334,6 +348,9 @@ get_network_prefer()
         "lte")
             get_network_prefer_lte
             ;;
+        "intel")
+            get_network_prefer_intel
+            ;;
         *)
             get_network_prefer_nr
             ;;
@@ -354,6 +371,9 @@ set_network_prefer()
             ;;
         "lte")
             set_network_prefer_lte $1
+            ;;
+        "intel")
+            set_network_prefer_intel $1
             ;;
         *)
             set_network_prefer_nr $1
@@ -611,6 +631,9 @@ get_lockband(){
         "lte")
             get_lockband_lte
             ;;
+        "intel")
+            get_lockband_intel
+            ;;
         *)
             get_lockband_nr
             ;;
@@ -825,6 +848,9 @@ set_lockband()
         "lte")
             set_lockband_lte
             ;;
+        "intel")
+            set_lockband_intel
+            ;;
         *)
             set_lockband_nr
             ;;
@@ -949,6 +975,144 @@ set_lockband_lte()
     local lock_band="$network_prefer_config,,,$lock_band"
     local set_lockband_command="AT+GTACT=$lock_band"
     res=$(at $at_port $set_lockband_command)
+}
+
+
+get_network_prefer_intel()
+{
+    at_command="AT+XACT?"
+    local response=$(at $at_port $at_command | grep "+XACT:" | sed 's/+XACT: //g' | sed 's/\r//g')
+    local mode=$(echo $response | awk -F',' '{print $1}')
+
+    local network_prefer_3g="0"
+    local network_prefer_4g="0"
+
+    case "$mode" in
+        "1") network_prefer_3g="1" ;;
+        "2") network_prefer_4g="1" ;;
+        "4")
+            network_prefer_3g="1"
+            network_prefer_4g="1"
+            ;;
+        *)
+            network_prefer_3g="1"
+            network_prefer_4g="1"
+            ;;
+    esac
+
+    json_add_object network_prefer
+    json_add_string 3G $network_prefer_3g
+    json_add_string 4G $network_prefer_4g
+    json_close_array
+}
+
+set_network_prefer_intel()
+{
+    network_prefer_3g=$(echo $1 | jq -r 'contains(["3G"])')
+    network_prefer_4g=$(echo $1 | jq -r 'contains(["4G"])')
+    count=$(echo $1 | jq -r 'length')
+
+    case "$count" in
+        "1")
+            if [ "$network_prefer_3g" = "true" ]; then
+                mode_num="1"
+            elif [ "$network_prefer_4g" = "true" ]; then
+                mode_num="2"
+            fi
+            ;;
+        "2")
+            mode_num="4"
+            ;;
+        *) mode_num="4" ;;
+    esac
+
+    at_command="AT+XACT=$mode_num,,,0"
+    res=$(at $at_port "$at_command")
+    json_select_object "result"
+    json_add_string "status" "$res"
+    json_close_object
+}
+
+get_lockband_intel()
+{
+    m_debug "Fibocom L850-GL get lockband"
+    get_lockband_command="AT+XACT?"
+    get_available_command="AT+XACT=?"
+    local config_res=$(at $at_port $get_lockband_command | grep "+XACT:" | sed 's/+XACT: //g' | sed 's/\r//g')
+    local avail_res=$(at $at_port $get_available_command | grep "+XACT:" | sed 's/+XACT: //g' | sed 's/\r//g')
+
+    json_add_object "UMTS"
+    json_add_array "available_band"
+    json_close_array
+    json_add_array "lock_band"
+    json_close_array
+    json_close_object
+    json_add_object "LTE"
+    json_add_array "available_band"
+    json_close_array
+    json_add_array "lock_band"
+    json_close_array
+    json_close_object
+
+    # Parse locked bands dari config (field 4+)
+    local locked_bands=$(echo "$config_res" | cut -d',' -f4-)
+    # Parse available bands dari AT+XACT=? (setelah kurung tutup kedua)
+    local avail_bands=$(echo "$avail_res" | sed 's/([^)]*)//g' | sed 's/^,//')
+
+    for i in $(echo "$avail_bands" | tr ',' '\n'); do
+        [ -z "$i" ] && continue
+        if [ "$i" -lt 100 ] 2>/dev/null; then
+            json_select "UMTS"
+            json_select "available_band"
+            add_avalible_band_entry "$i" "UMTS_$i"
+            json_select ".."
+            json_select ".."
+            echo "$locked_bands" | tr ',' '\n' | grep -qx "$i" && {
+                json_select "UMTS"
+                json_select "lock_band"
+                json_add_string "" "$i"
+                json_select ".."
+                json_select ".."
+            }
+        else
+            local band_num=$((i - 100))
+            json_select "LTE"
+            json_select "available_band"
+            add_avalible_band_entry "$i" "B$band_num"
+            json_select ".."
+            json_select ".."
+            echo "$locked_bands" | tr ',' '\n' | grep -qx "$i" && {
+                json_select "LTE"
+                json_select "lock_band"
+                json_add_string "" "$i"
+                json_select ".."
+                json_select ".."
+            }
+        fi
+    done
+    json_close_array
+}
+
+set_lockband_intel()
+{
+    m_debug "Fibocom L850-GL set lockband"
+    local config=$1
+    local band_class=$(echo $config | jq -r '.band_class')
+    local lock_band=$(echo $config | jq -r '.lock_band')
+
+    # Ambil mode saat ini
+    local current=$(at $at_port "AT+XACT?" | grep "+XACT:" | sed 's/+XACT: //g' | sed 's/\r//g')
+    local mode=$(echo $current | awk -F',' '{print $1}')
+    local pref=$(echo $current | awk -F',' '{print $2}')
+
+    [ -z "$mode" ] && mode="2"
+    [ -z "$pref" ] && pref="2"
+
+    local bands=$(echo $lock_band | jq -r '.[] | tostring' | tr '\n' ',' | sed 's/,$//')
+    [ -z "$bands" ] && bands="0"
+
+    at_command="AT+XACT=$mode,$pref,,$bands"
+    res=$(at $at_port "$at_command")
 }
 
 get_neighborcell()

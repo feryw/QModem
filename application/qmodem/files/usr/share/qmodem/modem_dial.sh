@@ -113,6 +113,9 @@ get_platform_suggest_pdp_index()
             mediatek)
                 echo 3
                 ;;
+            intel)
+                echo 0
+                ;;
             *)
                 echo 1
                 ;;
@@ -358,6 +361,10 @@ set_if()
         "fibocom")
             case $platform in
                 "mediatek")
+                    proto="static"
+                    protov6="dhcpv6"
+                    ;;
+                "intel")
                     proto="static"
                     protov6="dhcpv6"
                     ;;
@@ -618,6 +625,10 @@ ecm_hang()
                 "mediatek")
                     at_command="AT+CGACT=0,$pdp_index"
                     ;;
+                "intel")
+                    at "${at_port}" "AT+XDATACHANNEL=0"
+                    at_command="AT+CGDATA=0"
+                    ;;
                 *)
                     at_command="AT+GTRNDIS=0,$pdp_index"
                     ;;
@@ -823,6 +834,24 @@ at_dial()
                         fi
                     fi
                     ;;
+                "intel")
+                    # Fibocom L850-GL / L860-GL (Intel XMM platform)
+                    cgdcont_command="AT+CGDCONT=$pdp_index,\"$pdp_type\",\"$apn\""
+                    xdns_command="AT+XDNS=$pdp_index,1;+XDNS=$pdp_index,2"
+                    xdata_command="AT+XDATACHANNEL=1,1,\"/USBCDC/0\",\"/USBHS/NCM/0\",2,0"
+                    at_command="AT+CGDATA=\"M-RAW_IP\",$pdp_index"
+                    if [ -n "$auth" ]; then
+                        case $auth in
+                            "pap")   auth_num=1 ;;
+                            "chap")  auth_num=2 ;;
+                            "auto"|"both"|"MsChapV2") auth_num=3 ;;
+                            *)       auth_num=0 ;;
+                        esac
+                        if [ -n "$username" ] || [ -n "$password" ] && [ "$auth_num" != "0" ]; then
+                            ppp_auth_command="AT+XGAUTH=$pdp_index,$auth_num,\"$username\",\"$password\""
+                        fi
+                    fi
+                    ;;
                 "unisoc")
                     at_command="AT+GTRNDIS=1,$pdp_index"
                     cgdcont_command="AT+CGDCONT=$pdp_index,\"$pdp_type\""$apn_append
@@ -932,6 +961,8 @@ at_dial()
 		 	;;
 		*)
   			at "${at_port}" "${cgdcont_command}"
+            [ -n "$xdns_command" ] && at "${at_port}" "$xdns_command"
+            [ -n "$xdata_command" ] && at "${at_port}" "$xdata_command"
             [ -n "$ppp_auth_command" ] && at "${at_port}" "$ppp_auth_command"
             [ -n "$nat_cfg" ] && at "${at_port}" "$nat_cfg"
         	at "${at_port}" "$at_command"
