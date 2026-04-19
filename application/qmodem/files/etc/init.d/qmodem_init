@@ -120,6 +120,19 @@ _try_slot()
         procd_set_param command  "ash" "/usr/share/qmodem/modem_scan.sh" "add" "$slot" "$type"
         procd_close_instance
     else
+        # Retry for modems that reset on power-on (e.g. Fibocom L850-GL Intel XMM)
+        local retry=0
+        while [ $retry -lt 6 ]; do
+            sleep 5
+            if [ -d "$path" ]; then
+                logger -t modem_init "try modem $1 after retry $retry"
+                procd_open_instance "try_$1"
+                procd_set_param command  "ash" "/usr/share/qmodem/modem_scan.sh" "add" "$slot" "$type"
+                procd_close_instance
+                return
+            fi
+            retry=$((retry+1))
+        done
         /usr/share/qmodem/modem_scan.sh disable "$slot"
     fi
 }
