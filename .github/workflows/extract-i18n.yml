@@ -12,6 +12,8 @@ on:
     paths:
       - 'application/qmodem/files/usr/share/qmodem/**'
       - 'luci/luci-app-qmodem-next/htdocs/luci-static/resources/**'
+permissions:
+  contents: write
 
 jobs:
   extract-i18n:
@@ -46,4 +48,5 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add luci/luci-app-qmodem-next/po/template
           git commit -m "chore: update i18n template strings [skip ci]"
+          git pull --rebase
           git push

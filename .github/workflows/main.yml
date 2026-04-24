@@ -18,9 +18,10 @@ on:
       - "README*.md"
       - ".github/workflows/**"
       - ".github/**"
-
+permissions:
+  contents: write
 env:
-  TZ: Asia/Shanghai
+  TZ: Asia/Jakarta
 
 jobs:
   job_auto_tag:
@@ -162,7 +163,7 @@ jobs:
     continue-on-error: true
     strategy:
       matrix:
-        build_arch: ['arm64_ipk',"arm64_apk","x64_apk","x64_ipk","mmips_ipk","mmips_apk","aarch64_generic_ipk","armv7_ipk" ]
+        build_arch: ['aarch64_cortex-a53_ipk',"aarch64_cortex-a53_apk","x86_64_apk","x86_64_ipk","mipsel_24kc_ipk","mipsel_24kc_apk","aarch64_armv8_generic_ipk","armv7_ipk" ]
     runs-on: ubuntu-latest
     steps:
       - name: Install packages

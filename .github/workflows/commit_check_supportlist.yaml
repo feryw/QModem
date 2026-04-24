@@ -1,14 +1,15 @@
 name: "Update Support List"
 on:
-    push:
-        branches:
-            - 'main'
-        # only run when "luci/luci-app-qmodem/root/usr/share/qmodem/modem_support.json" is changed
-        paths:
-            - 'application/qmodem/files/usr/share/qmodem/modem_support.json'
-
+  push:
+    branches:
+      - 'main'
+    # only run when "luci/luci-app-qmodem/root/usr/share/qmodem/modem_support.json" is changed
+    paths:
+      - 'application/qmodem/files/usr/share/qmodem/modem_support.json'
+permissions:
+  contents: write
 env:
-    TZ: Asia/Shanghai
+  TZ: Asia/Jakarta
 
 jobs:
     update_support_list:
