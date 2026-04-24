@@ -8,8 +8,12 @@ source /usr/share/qmodem/generic.sh
 debug_subject="compal_ctrl"
 #return raw data
 get_imei(){
-    at_command="AT+CGSN"
+    at_command="AT+GSN"
     imei=$(at $at_port $at_command | grep -o "[0-9]\{15\}")
+    if [ -z "$imei" ]; then
+        at_command="AT+CGSN"
+        imei=$(at $at_port $at_command | grep -o "[0-9]\{15\}")
+    fi
     json_add_string "imei" "$imei"
 }
 
@@ -308,17 +312,21 @@ set_network_prefer_nr()
 get_voltage()
 {
     at_command="AT+CBC"
-	local voltage=$(at ${at_port} ${at_command} | grep "+CBC:" | awk -F',' '{print $3}' | sed 's/\r//g')
-    [ -n "$voltage" ] && {
-        add_plain_info_entry "voltage" "$voltage mV" "Voltage" 
-    }
+    response=$(at ${at_port} ${at_command} | grep "+CBC:" | sed 's/\r//g')
+    bcs=$(echo "$response" | awk -F'[:, ]+' '{print $3}' | cut -d',' -f1)
+    bcl=$(echo "$response" | awk -F'[:, ]+' '{print $3}' | cut -d',' -f2)
+    voltage=$(echo "$response" | awk -F',' '{print $3}')
+    [ -n "$bcs" ] && add_plain_info_entry "battery_status" "$bcs" "Battery Status"
+    [ -n "$bcl" ] && add_plain_info_entry "battery_level" "$bcl%" "Battery Level"
+    if echo "$voltage" | grep -qE '^[0-9]+$'; then
+        add_plain_info_entry "voltage" "$voltage mV" "Voltage"
+    fi
 }
 
 #获取温度
 #return raw data
 get_temperature()
 {   
-    #Temperature（温度）
     at_command="AT+QTEMP"
     local temp
     local line=1
@@ -332,10 +340,18 @@ get_temperature()
             fi
         done
     done
-	if [ -n "$temp" ]; then
-		temp="${temp}$(printf "\xc2\xb0")C"
-	fi
-    add_plain_info_entry "temperature" "$temp" "Temperature"
+    if [ -n "$temp" ]; then
+        temp="${temp}$(printf "\xc2\xb0")C"
+        add_plain_info_entry "temperature" "$temp" "Temperature"
+        return
+    fi
+
+    at_command="AT+CEITHERM?"
+    response=$(at ${at_port} ${at_command} | tr -d '\r')
+    modem_level=$(echo "$response" | grep -i "modem level" | awk -F':' '{print $2}' | tr -d ' ')
+    if echo "$modem_level" | grep -qE '^[0-9]+$'; then
+        add_plain_info_entry "temperature" "Level $modem_level" "Thermal Level"
+    fi
 }
 
 
@@ -345,17 +361,14 @@ base_info()
 {
     m_debug  "Compal base info"
 
-    #Name（名称）
-    at_command="AT+CGMM"
-    name=$(at $at_port $at_command | sed -n '2p' | sed 's/\r//g')
-    #Manufacturer（制造商）
-    at_command="AT+CGMI"
-    manufacturer=$(at $at_port $at_command | sed -n '2p' | sed 's/\r//g')
-    #Revision（固件版本）
     at_command="ATI"
-    revision=$(at $at_port $at_command | grep "Revision:" | sed 's/Revision: //g' | sed 's/\r//g')
-    # at_command="AT+CGMR"
-    # revision=$(at $at_port $at_command | sed -n '2p' | sed 's/\r//g')
+    ati=$(at $at_port $at_command | tr -d '\r')
+    name=$(echo "$ati" | grep "Model:" | sed 's/Model: //g' | head -n 1)
+    [ -z "$name" ] && name=$(at $at_port "AT+GMM" | sed -n '2p' | tr -d '\r')
+    manufacturer=$(echo "$ati" | grep "Manufacturer:" | sed 's/Manufacturer: //g' | head -n 1)
+    [ -z "$manufacturer" ] && manufacturer=$(at $at_port "AT+GMI" | sed -n '2p' | tr -d '\r')
+    revision=$(echo "$ati" | grep "Revision:" | sed 's/Revision: //g' | head -n 1)
+    [ -z "$revision" ] && revision=$(at $at_port "AT+GMR" | sed -n '2p' | tr -d '\r')
     class="Base Information"
     add_plain_info_entry "name" "$name" "Name"
     add_plain_info_entry "manufacturer" "$manufacturer" "Manufacturer"
@@ -377,8 +390,12 @@ sim_info()
 	sim_slot=$(at $at_port $at_command | grep "+QUIMSLOT:" | awk -F' ' '{print $2}' | sed 's/\r//g')
 
     #IMEI（国际移动设备识别码）
-    at_command="AT+CGSN"
+    at_command="AT+GSN"
 	imei=$(at $at_port $at_command | sed -n '2p' | sed 's/\r//g')
+    if [ -z "$imei" ]; then
+        at_command="AT+CGSN"
+        imei=$(at $at_port $at_command | sed -n '2p' | sed 's/\r//g')
+    fi
 
     #SIM Status（SIM状态）
     at_command="AT+CPIN?"

@@ -284,167 +284,109 @@
 	},
 	"compal": {
 		"qualcomm": [
-			{
-				"SIM卡状态上报 > AT+QSIMSTAT?": "AT+QSIMSTAT?"
-			},
-			{
-				"设置当前使用的为卡1 > AT+QUIMSLOT=1": "AT+QUIMSLOT=1"
-			},
-			{
-				"设置当前使用的为卡2 > AT+QUIMSLOT=2": "AT+QUIMSLOT=2"
-			},
-			{
-				"查询网络信息 > AT+QNWINFO": "AT+QNWINFO"
-			},
-			{
-				"查询载波聚合参数 > AT+QCAINFO": "AT+QCAINFO"
-			},
-			{
-				"查询5G信号强度（RSRP） > AT+QRSRP": "AT+QRSRP"
-			},
-			{
-				"查询当前拨号模式 > AT+QCFG=\"usbnet\"": "AT+QCFG=\"usbnet\""
-			},
-			{
-				"QMI/GobiNet拨号模式 > AT+QCFG=\"usbnet\",0": "AT+QCFG=\"usbnet\",0"
-			},
-			{
-				"ECM拨号模式 > AT+QCFG=\"usbnet\",1": "AT+QCFG=\"usbnet\",1"
-			},
-			{
-				"MBIM拨号模式 > AT+QCFG=\"usbnet\",2": "AT+QCFG=\"usbnet\",2"
-			},
-			{
-				"RNDIS拨号模式 > AT+QCFG=\"usbnet\",3": "AT+QCFG=\"usbnet\",3"
-			},
-			{
-				"NCM拨号模式 > AT+QCFG=\"usbnet\",5": "AT+QCFG=\"usbnet\",5"
-			},
-			{
-				"锁4G > AT+QNWPREFCFG=\"mode_pref\",LTE": "AT+QNWPREFCFG=\"mode_pref\",LTE"
-			},
-			{
-				"锁5G > AT+QNWPREFCFG=\"mode_pref\",NR5G": "AT+QNWPREFCFG=\"mode_pref\",NR5G"
-			},
-			{
-				"锁5G NSA > AT+QNWPREFCFG=\"mode_pref\",NR5G-NSA": "AT+QNWPREFCFG=\"mode_pref\",NR5G-NSA"
-			},
-			{
-				"锁5G SA > AT+QNWPREFCFG=\"mode_pref\",NR5G-SA": "AT+QNWPREFCFG=\"mode_pref\",NR5G-SA"
-			},
-			{
-				"恢复自动搜索网络 > AT+QNWPREFCFG=\"mode_pref\",AUTO": "AT+QNWPREFCFG=\"mode_pref\",AUTO"
-			},
-			{
-				"查询模组IMEI > AT+EGMR=0,7": "AT+EGMR=0,7"
-			},
-			{
-				"更改模组IMEI > AT+EGMR=1,7,\"IMEI\"": "AT+EGMR=1,7,\"在此设置IMEI\""
-			},
-			{
-				"获取模组温度 > AT+QTEMP": "AT+QTEMP"
-			},
-			{
-				"切换为USB通信端口 > AT+QCFG=\"data_interface\",0,0": "AT+QCFG=\"data_interface\",0,0"
-			},
-			{
-				"切换为PCIE通信端口 > AT+QCFG=\"data_interface\",1,0": "AT+QCFG=\"data_interface\",1,0"
-			},
-			{
-				"查看当前USB速率 > AT+QCFG=\"usbspeed\"": "AT+QCFG=\"usbspeed\""
-			},
-			{
-				"切换为USB2.0 > AT+QCFG=\"usbspeed\",\"20\"": "AT+QCFG=\"usbspeed\",\"20\""
-			},
-			{
-				"切换为USB3.1 Gen1（5Gbps） > AT+QCFG=\"usbspeed\",\"311\"": "AT+QCFG=\"usbspeed\",\"311\""
-			},
-			{
-				"切换为USB3.1 Gen1（10Gbps） > AT+QCFG=\"usbspeed\",\"312\"": "AT+QCFG=\"usbspeed\",\"312\""
-			},
-			{
-				"重置模组 > AT+QCFG=\"ResetFactory\"": "AT+QCFG=\"ResetFactory\""
-			}
+			{"查询模块信息 > ATI": "ATI"},
+			{"查询射频状态 > AT+CFUN?": "AT+CFUN?"},
+			{"开启射频/开机 > AT+CFUN=1": "AT+CFUN=1"},
+			{"最小功能模式 > AT+CFUN=0": "AT+CFUN=0"},
+			{"重启模组 > AT+CFUN=1,1": "AT+CFUN=1,1"},
+			{"查询SIM状态 > AT+CPIN?": "AT+CPIN?"},
+			{"查询运营商 > AT+COPS?": "AT+COPS?"},
+			{"设置运营商显示格式 > AT+COPS=3,2": "AT+COPS=3,2"},
+			{"查询5G注册状态 > AT+C5GREG?": "AT+C5GREG?"},
+			{"查询4G注册状态 > AT+CEREG?": "AT+CEREG?"},
+			{"查询CS域注册状态 > AT+CREG?": "AT+CREG?"},
+			{"查询PS域注册状态 > AT+CGREG?": "AT+CGREG?"},
+			{"查询附着状态 > AT+CGATT?": "AT+CGATT?"},
+			{"附着网络 > AT+CGATT=1": "AT+CGATT=1"},
+			{"分离网络 > AT+CGATT=0": "AT+CGATT=0"},
+			{"查询PDP上下文 > AT+CGDCONT?": "AT+CGDCONT?"},
+			{"查询当前连接参数 > AT+CGCONTRDP": "AT+CGCONTRDP"},
+			{"查询PDP激活状态 > AT+CGACT?": "AT+CGACT?"},
+			{"激活PDP上下文 > AT+CGACT=1,<cid>": "AT+CGACT=1,<cid>"},
+			{"去激活PDP上下文 > AT+CGACT=0,<cid>": "AT+CGACT=0,<cid>"},
+			{"查询PDP地址 > AT+CGPADDR=<cid>": "AT+CGPADDR=<cid>"},
+			{"查询信号强度 (4G) > AT+CSQ": "AT+CSQ"},
+			{"查询扩展信号强度 (5G) > AT+CESQDBM": "AT+CESQDBM"},
+			{"查询扩展信号强度 > AT+CESQ": "AT+CESQ"},
+			{"查询电池状态 > AT+CBC": "AT+CBC"},
+			{"查询热状态 > AT+CEITHERM?": "AT+CEITHERM?"},
+			{"查询最近错误原因 > AT+CEER": "AT+CEER"},
+			{"查询制造商 > AT+GMI": "AT+GMI"},
+			{"查询型号 > AT+GMM": "AT+GMM"},
+			{"查询固件版本 > AT+GMR": "AT+GMR"},
+			{"查询IMEI > AT+GSN": "AT+GSN"},
+			{"查询IMEI (备用) > AT+CGSN": "AT+CGSN"},
+			{"查询IMSI > AT+CIMI": "AT+CIMI"},
+			{"查询ICCID > AT+ICCID": "AT+ICCID"},
+			{"查询本机号码 > AT+CNUM": "AT+CNUM"},
+			{"查询当前通话 > AT+CLCC": "AT+CLCC"},
+			{"查询设备活动状态 > AT+CPAS": "AT+CPAS"},
+			{"查询短信格式 > AT+CMGF?": "AT+CMGF?"},
+			{"设置短信格式为文本 > AT+CMGF=1": "AT+CMGF=1"},
+			{"设置短信格式为PDU > AT+CMGF=0": "AT+CMGF=0"},
+			{"查询剩余PIN/PUK次数 > AT+CPINR?": "AT+CPINR?"},
+			{"查询模块时间 > AT+CCLK?": "AT+CCLK?"},
+			{"启用网络时间同步 > AT+CTZU=1": "AT+CTZU=1"},
+			{"禁用网络时间同步 > AT+CTZU=0": "AT+CTZU=0"},
+			{"查询时间同步状态 > AT+CTZU?": "AT+CTZU?"},
+			{"查询错误报告模式 > AT+CMEE?": "AT+CMEE?"},
+			{"设置详细错误报告 > AT+CMEE=2": "AT+CMEE=2"},
+			{"查询字符集 > AT+CSCS?": "AT+CSCS?"},
+			{"切换SIM卡槽 (卡1) > AT+CEISWITCHSIM=1": "AT+CEISWITCHSIM=1"},
+			{"切换SIM卡槽 (卡2) > AT+CEISWITCHSIM=2": "AT+CEISWITCHSIM=2"},
+			{"查询SIM卡槽状态 > AT+CEISWITCHSIM?": "AT+CEISWITCHSIM?"},
+			{"查询操作模式 (EPS/5G) > AT+CEMODE?": "AT+CEMODE?"},
+			{"查询完整产品信息 > AT+PRODUCTINFO": "AT+PRODUCTINFO"},
+			{"查询设备序列号 > AT+CEISN": "AT+CEISN"},
+			{"查询高通固件版本 > AT+QCVER": "AT+QCVER"},
+			{"查询射频温度读数 > AT+CEITHERM": "AT+CEITHERM"}
 		],
 		"general": [
-			{
-				"SIM卡状态上报 > AT+QSIMSTAT?": "AT+QSIMSTAT?"
-			},
-			{
-				"设置当前使用的为卡1 > AT+QUIMSLOT=1": "AT+QUIMSLOT=1"
-			},
-			{
-				"设置当前使用的为卡2 > AT+QUIMSLOT=2": "AT+QUIMSLOT=2"
-			},
-			{
-				"查询网络信息 > AT+QNWINFO": "AT+QNWINFO"
-			},
-			{
-				"查询载波聚合参数 > AT+QCAINFO": "AT+QCAINFO"
-			},
-			{
-				"查询当前拨号模式 > AT+QCFG=\"usbnet\"": "AT+QCFG=\"usbnet\""
-			},
-			{
-				"QMI/GobiNet拨号模式 > AT+QCFG=\"usbnet\",0": "AT+QCFG=\"usbnet\",0"
-			},
-			{
-				"ECM拨号模式 > AT+QCFG=\"usbnet\",1": "AT+QCFG=\"usbnet\",1"
-			},
-			{
-				"MBIM拨号模式 > AT+QCFG=\"usbnet\",2": "AT+QCFG=\"usbnet\",2"
-			},
-			{
-				"RNDIS拨号模式 > AT+QCFG=\"usbnet\",3": "AT+QCFG=\"usbnet\",3"
-			},
-			{
-				"NCM拨号模式 > AT+QCFG=\"usbnet\",5": "AT+QCFG=\"usbnet\",5"
-			},
-			{
-				"锁4G > AT+QNWPREFCFG=\"mode_pref\",LTE": "AT+QNWPREFCFG=\"mode_pref\",LTE"
-			},
-			{
-				"锁5G > AT+QNWPREFCFG=\"mode_pref\",NR5G": "AT+QNWPREFCFG=\"mode_pref\",NR5G"
-			},
-			{
-				"锁5G NSA > AT+QNWPREFCFG=\"mode_pref\",NR5G-NSA": "AT+QNWPREFCFG=\"mode_pref\",NR5G-NSA"
-			},
-			{
-				"锁5G SA > AT+QNWPREFCFG=\"mode_pref\",NR5G-SA": "AT+QNWPREFCFG=\"mode_pref\",NR5G-SA"
-			},
-			{
-				"恢复自动搜索网络 > AT+QNWPREFCFG=\"mode_pref\",AUTO": "AT+QNWPREFCFG=\"mode_pref\",AUTO"
-			},
-			{
-				"查询模组IMEI > AT+EGMR=0,7": "AT+EGMR=0,7"
-			},
-			{
-				"更改模组IMEI > AT+EGMR=1,7,\"IMEI\"": "AT+EGMR=1,7,\"在此设置IMEI\""
-			},
-			{
-				"获取模组温度 > AT+QTEMP": "AT+QTEMP"
-			},
-			{
-				"切换为USB通信端口 > AT+QCFG=\"data_interface\",0,0": "AT+QCFG=\"data_interface\",0,0"
-			},
-			{
-				"切换为PCIE通信端口 > AT+QCFG=\"data_interface\",1,0": "AT+QCFG=\"data_interface\",1,0"
-			},
-			{
-				"查看当前USB速率 > AT+QCFG=\"usbspeed\"": "AT+QCFG=\"usbspeed\""
-			},
-			{
-				"切换为USB2.0 > AT+QCFG=\"usbspeed\",\"20\"": "AT+QCFG=\"usbspeed\",\"20\""
-			},
-			{
-				"切换为USB3.1 Gen1（5Gbps） > AT+QCFG=\"usbspeed\",\"311\"": "AT+QCFG=\"usbspeed\",\"311\""
-			},
-			{
-				"切换为USB3.1 Gen1（10Gbps） > AT+QCFG=\"usbspeed\",\"312\"": "AT+QCFG=\"usbspeed\",\"312\""
-			},
-			{
-				"重置模组 > AT+QCFG=\"ResetFactory\"": "AT+QCFG=\"ResetFactory\""
-			}
+			{"查询模块信息 > ATI": "ATI"},
+			{"查询射频状态 > AT+CFUN?": "AT+CFUN?"},
+			{"开启射频/开机 > AT+CFUN=1": "AT+CFUN=1"},
+			{"最小功能模式 > AT+CFUN=0": "AT+CFUN=0"},
+			{"重启模组 > AT+CFUN=1,1": "AT+CFUN=1,1"},
+			{"查询SIM状态 > AT+CPIN?": "AT+CPIN?"},
+			{"查询运营商 > AT+COPS?": "AT+COPS?"},
+			{"查询5G注册状态 > AT+C5GREG?": "AT+C5GREG?"},
+			{"查询4G注册状态 > AT+CEREG?": "AT+CEREG?"},
+			{"查询CS域注册状态 > AT+CREG?": "AT+CREG?"},
+			{"查询PS域注册状态 > AT+CGREG?": "AT+CGREG?"},
+			{"查询附着状态 > AT+CGATT?": "AT+CGATT?"},
+			{"附着网络 > AT+CGATT=1": "AT+CGATT=1"},
+			{"分离网络 > AT+CGATT=0": "AT+CGATT=0"},
+			{"查询PDP上下文 > AT+CGDCONT?": "AT+CGDCONT?"},
+			{"查询当前连接参数 > AT+CGCONTRDP": "AT+CGCONTRDP"},
+			{"查询PDP激活状态 > AT+CGACT?": "AT+CGACT?"},
+			{"激活PDP上下文 > AT+CGACT=1,<cid>": "AT+CGACT=1,<cid>"},
+			{"去激活PDP上下文 > AT+CGACT=0,<cid>": "AT+CGACT=0,<cid>"},
+			{"查询PDP地址 > AT+CGPADDR=<cid>": "AT+CGPADDR=<cid>"},
+			{"查询信号强度 > AT+CSQ": "AT+CSQ"},
+			{"查询电池状态 > AT+CBC": "AT+CBC"},
+			{"查询热状态 > AT+CEITHERM?": "AT+CEITHERM?"},
+			{"查询最近错误原因 > AT+CEER": "AT+CEER"},
+			{"查询制造商 > AT+GMI": "AT+GMI"},
+			{"查询型号 > AT+GMM": "AT+GMM"},
+			{"查询固件版本 > AT+GMR": "AT+GMR"},
+			{"查询IMEI > AT+GSN": "AT+GSN"},
+			{"查询IMEI (备用) > AT+CGSN": "AT+CGSN"},
+			{"查询IMSI > AT+CIMI": "AT+CIMI"},
+			{"查询ICCID > AT+ICCID": "AT+ICCID"},
+			{"查询本机号码 > AT+CNUM": "AT+CNUM"},
+			{"查询当前通话 > AT+CLCC": "AT+CLCC"},
+			{"查询设备活动状态 > AT+CPAS": "AT+CPAS"},
+			{"查询短信格式 > AT+CMGF?": "AT+CMGF?"},
+			{"设置短信格式为文本 > AT+CMGF=1": "AT+CMGF=1"},
+			{"设置短信格式为PDU > AT+CMGF=0": "AT+CMGF=0"},
+			{"查询剩余PIN/PUK次数 > AT+CPINR?": "AT+CPINR?"},
+			{"查询模块时间 > AT+CCLK?": "AT+CCLK?"},
+			{"启用网络时间同步 > AT+CTZU=1": "AT+CTZU=1"},
+			{"禁用网络时间同步 > AT+CTZU=0": "AT+CTZU=0"},
+			{"查询时间同步状态 > AT+CTZU?": "AT+CTZU?"},
+			{"查询错误报告模式 > AT+CMEE?": "AT+CMEE?"},
+			{"设置详细错误报告 > AT+CMEE=2": "AT+CMEE=2"},
+			{"查询字符集 > AT+CSCS?": "AT+CSCS?"}
 		]
 	},
 	"fibocom": {

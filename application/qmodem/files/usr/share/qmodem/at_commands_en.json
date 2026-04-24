@@ -284,167 +284,109 @@
     },
     "compal": {
         "qualcomm": [
-            {
-                "SIM Card Status Report > AT+QSIMSTAT?": "AT+QSIMSTAT?"
-            },
-            {
-                "Set Current SIM to Slot 1 > AT+QUIMSLOT=1": "AT+QUIMSLOT=1"
-            },
-            {
-                "Set Current SIM to Slot 2 > AT+QUIMSLOT=2": "AT+QUIMSLOT=2"
-            },
-            {
-                "Query Network Information > AT+QNWINFO": "AT+QNWINFO"
-            },
-            {
-                "Query Carrier Aggregation Parameters > AT+QCAINFO": "AT+QCAINFO"
-            },
-            {
-                "Query 5G Signal Strength (RSRP) > AT+QRSRP": "AT+QRSRP"
-            },
-            {
-                "Query Current Dial Mode > AT+QCFG=\"usbnet\"": "AT+QCFG=\"usbnet\""
-            },
-            {
-                "QMI/GobiNet Dial Mode > AT+QCFG=\"usbnet\",0": "AT+QCFG=\"usbnet\",0"
-            },
-            {
-                "ECM Dial Mode > AT+QCFG=\"usbnet\",1": "AT+QCFG=\"usbnet\",1"
-            },
-            {
-                "MBIM Dial Mode > AT+QCFG=\"usbnet\",2": "AT+QCFG=\"usbnet\",2"
-            },
-            {
-                "RNDIS Dial Mode > AT+QCFG=\"usbnet\",3": "AT+QCFG=\"usbnet\",3"
-            },
-            {
-                "NCM Dial Mode > AT+QCFG=\"usbnet\",5": "AT+QCFG=\"usbnet\",5"
-            },
-            {
-                "Lock to 4G > AT+QNWPREFCFG=\"mode_pref\",LTE": "AT+QNWPREFCFG=\"mode_pref\",LTE"
-            },
-            {
-                "Lock to 5G > AT+QNWPREFCFG=\"mode_pref\",NR5G": "AT+QNWPREFCFG=\"mode_pref\",NR5G"
-            },
-            {
-                "Lock to 5G NSA > AT+QNWPREFCFG=\"mode_pref\",NR5G-NSA": "AT+QNWPREFCFG=\"mode_pref\",NR5G-NSA"
-            },
-            {
-                "Lock to 5G SA > AT+QNWPREFCFG=\"mode_pref\",NR5G-SA": "AT+QNWPREFCFG=\"mode_pref\",NR5G-SA"
-            },
-            {
-                "Restore Automatic Network Search > AT+QNWPREFCFG=\"mode_pref\",AUTO": "AT+QNWPREFCFG=\"mode_pref\",AUTO"
-            },
-            {
-                "Query Module IMEI > AT+EGMR=0,7": "AT+EGMR=0,7"
-            },
-            {
-                "Change Module IMEI > AT+EGMR=1,7,\"IMEI\"": "AT+EGMR=1,7,\"Set IMEI here\""
-            },
-            {
-                "Get Module Temperature > AT+QTEMP": "AT+QTEMP"
-            },
-            {
-                "Switch to USB Communication Port > AT+QCFG=\"data_interface\",0,0": "AT+QCFG=\"data_interface\",0,0"
-            },
-            {
-                "Switch to PCIE Communication Port > AT+QCFG=\"data_interface\",1,0": "AT+QCFG=\"data_interface\",1,0"
-            },
-            {
-                "Check Current USB Speed > AT+QCFG=\"usbspeed\"": "AT+QCFG=\"usbspeed\""
-            },
-            {
-                "Switch to USB2.0 > AT+QCFG=\"usbspeed\",\"20\"": "AT+QCFG=\"usbspeed\",\"20\""
-            },
-            {
-                "Switch to USB3.1 Gen1 (5Gbps) > AT+QCFG=\"usbspeed\",\"311\"": "AT+QCFG=\"usbspeed\",\"311\""
-            },
-            {
-                "Switch to USB3.1 Gen1 (10Gbps) > AT+QCFG=\"usbspeed\",\"312\"": "AT+QCFG=\"usbspeed\",\"312\""
-            },
-            {
-                "Reset Module > AT+QCFG=\"ResetFactory\"": "AT+QCFG=\"ResetFactory\""
-            }
+            {"Module Info > ATI": "ATI"},
+            {"Query RF State > AT+CFUN?": "AT+CFUN?"},
+            {"Enable RF / Power On > AT+CFUN=1": "AT+CFUN=1"},
+            {"Minimum Function Mode > AT+CFUN=0": "AT+CFUN=0"},
+            {"Restart Module > AT+CFUN=1,1": "AT+CFUN=1,1"},
+            {"Query SIM Status > AT+CPIN?": "AT+CPIN?"},
+            {"Query Operator > AT+COPS?": "AT+COPS?"},
+            {"Set Operator Display Format > AT+COPS=3,2": "AT+COPS=3,2"},
+            {"Query 5G Registration > AT+C5GREG?": "AT+C5GREG?"},
+            {"Query LTE Registration > AT+CEREG?": "AT+CEREG?"},
+            {"Query CS Domain Registration > AT+CREG?": "AT+CREG?"},
+            {"Query PS Domain Registration > AT+CGREG?": "AT+CGREG?"},
+            {"Query Attach State > AT+CGATT?": "AT+CGATT?"},
+            {"Attach Network > AT+CGATT=1": "AT+CGATT=1"},
+            {"Detach Network > AT+CGATT=0": "AT+CGATT=0"},
+            {"Query PDP Context > AT+CGDCONT?": "AT+CGDCONT?"},
+            {"Query Current PDP Info > AT+CGCONTRDP": "AT+CGCONTRDP"},
+            {"Query PDP Activation Status > AT+CGACT?": "AT+CGACT?"},
+            {"Activate PDP Context > AT+CGACT=1,<cid>": "AT+CGACT=1,<cid>"},
+            {"Deactivate PDP Context > AT+CGACT=0,<cid>": "AT+CGACT=0,<cid>"},
+            {"Query PDP Address > AT+CGPADDR=<cid>": "AT+CGPADDR=<cid>"},
+            {"Query Signal Strength (4G) > AT+CSQ": "AT+CSQ"},
+            {"Query Extended Signal Strength (5G) > AT+CESQDBM": "AT+CESQDBM"},
+            {"Query Extended Signal Strength > AT+CESQ": "AT+CESQ"},
+            {"Query Battery Status > AT+CBC": "AT+CBC"},
+            {"Query Thermal Status > AT+CEITHERM?": "AT+CEITHERM?"},
+            {"Query Last Error Cause > AT+CEER": "AT+CEER"},
+            {"Query Manufacturer > AT+GMI": "AT+GMI"},
+            {"Query Model > AT+GMM": "AT+GMM"},
+            {"Query Firmware Revision > AT+GMR": "AT+GMR"},
+            {"Query IMEI > AT+GSN": "AT+GSN"},
+            {"Query IMEI (Alternative) > AT+CGSN": "AT+CGSN"},
+            {"Query IMSI > AT+CIMI": "AT+CIMI"},
+            {"Query ICCID > AT+ICCID": "AT+ICCID"},
+            {"Query Phone Number > AT+CNUM": "AT+CNUM"},
+            {"Query Current Calls > AT+CLCC": "AT+CLCC"},
+            {"Query Device Activity Status > AT+CPAS": "AT+CPAS"},
+            {"Query SMS Format > AT+CMGF?": "AT+CMGF?"},
+            {"Set SMS Format to Text > AT+CMGF=1": "AT+CMGF=1"},
+            {"Set SMS Format to PDU > AT+CMGF=0": "AT+CMGF=0"},
+            {"Query Remaining PIN/PUK Attempts > AT+CPINR?": "AT+CPINR?"},
+            {"Query Module Time > AT+CCLK?": "AT+CCLK?"},
+            {"Enable Network Time Sync > AT+CTZU=1": "AT+CTZU=1"},
+            {"Disable Network Time Sync > AT+CTZU=0": "AT+CTZU=0"},
+            {"Query Time Sync Status > AT+CTZU?": "AT+CTZU?"},
+            {"Query Error Report Mode > AT+CMEE?": "AT+CMEE?"},
+            {"Set Detailed Error Report > AT+CMEE=2": "AT+CMEE=2"},
+            {"Query Character Set > AT+CSCS?": "AT+CSCS?"},
+            {"Switch SIM Slot (Slot 1) > AT+CEISWITCHSIM=1": "AT+CEISWITCHSIM=1"},
+            {"Switch SIM Slot (Slot 2) > AT+CEISWITCHSIM=2": "AT+CEISWITCHSIM=2"},
+            {"Query SIM Slot Status > AT+CEISWITCHSIM?": "AT+CEISWITCHSIM?"},
+            {"Query Operation Mode (EPS/5G) > AT+CEMODE?": "AT+CEMODE?"},
+            {"Query Complete Product Info > AT+PRODUCTINFO": "AT+PRODUCTINFO"},
+            {"Query Device Serial Number > AT+CEISN": "AT+CEISN"},
+            {"Query Qualcomm Firmware Version > AT+QCVER": "AT+QCVER"},
+            {"Query RF Temperature Reading > AT+CEITHERM": "AT+CEITHERM"}
         ],
         "general": [
-            {
-                "SIM Card Status Report > AT+QSIMSTAT?": "AT+QSIMSTAT?"
-            },
-            {
-                "Set Current SIM to Slot 1 > AT+QUIMSLOT=1": "AT+QUIMSLOT=1"
-            },
-            {
-                "Set Current SIM to Slot 2 > AT+QUIMSLOT=2": "AT+QUIMSLOT=2"
-            },
-            {
-                "Query Network Information > AT+QNWINFO": "AT+QNWINFO"
-            },
-            {
-                "Query Carrier Aggregation Parameters > AT+QCAINFO": "AT+QCAINFO"
-            },
-            {
-                "Query Current Dial Mode > AT+QCFG=\"usbnet\"": "AT+QCFG=\"usbnet\""
-            },
-            {
-                "QMI/GobiNet Dial Mode > AT+QCFG=\"usbnet\",0": "AT+QCFG=\"usbnet\",0"
-            },
-            {
-                "ECM Dial Mode > AT+QCFG=\"usbnet\",1": "AT+QCFG=\"usbnet\",1"
-            },
-            {
-                "MBIM Dial Mode > AT+QCFG=\"usbnet\",2": "AT+QCFG=\"usbnet\",2"
-            },
-            {
-                "RNDIS Dial Mode > AT+QCFG=\"usbnet\",3": "AT+QCFG=\"usbnet\",3"
-            },
-            {
-                "NCM Dial Mode > AT+QCFG=\"usbnet\",5": "AT+QCFG=\"usbnet\",5"
-            },
-            {
-                "Lock to 4G > AT+QNWPREFCFG=\"mode_pref\",LTE": "AT+QNWPREFCFG=\"mode_pref\",LTE"
-            },
-            {
-                "Lock to 5G > AT+QNWPREFCFG=\"mode_pref\",NR5G": "AT+QNWPREFCFG=\"mode_pref\",NR5G"
-            },
-            {
-                "Lock to 5G NSA > AT+QNWPREFCFG=\"mode_pref\",NR5G-NSA": "AT+QNWPREFCFG=\"mode_pref\",NR5G-NSA"
-            },
-            {
-                "Lock to 5G SA > AT+QNWPREFCFG=\"mode_pref\",NR5G-SA": "AT+QNWPREFCFG=\"mode_pref\",NR5G-SA"
-            },
-            {
-                "Restore Automatic Network Search > AT+QNWPREFCFG=\"mode_pref\",AUTO": "AT+QNWPREFCFG=\"mode_pref\",AUTO"
-            },
-            {
-                "Query Module IMEI > AT+EGMR=0,7": "AT+EGMR=0,7"
-            },
-            {
-                "Change Module IMEI > AT+EGMR=1,7,\"IMEI\"": "AT+EGMR=1,7,\"Set IMEI here\""
-            },
-            {
-                "Get Module Temperature > AT+QTEMP": "AT+QTEMP"
-            },
-            {
-                "Switch to USB Communication Port > AT+QCFG=\"data_interface\",0,0": "AT+QCFG=\"data_interface\",0,0"
-            },
-            {
-                "Switch to PCIE Communication Port > AT+QCFG=\"data_interface\",1,0": "AT+QCFG=\"data_interface\",1,0"
-            },
-            {
-                "Check Current USB Speed > AT+QCFG=\"usbspeed\"": "AT+QCFG=\"usbspeed\""
-            },
-            {
-                "Switch to USB2.0 > AT+QCFG=\"usbspeed\",\"20\"": "AT+QCFG=\"usbspeed\",\"20\""
-            },
-            {
-                "Switch to USB3.1 Gen1 (5Gbps) > AT+QCFG=\"usbspeed\",\"311\"": "AT+QCFG=\"usbspeed\",\"311\""
-            },
-            {
-                "Switch to USB3.1 Gen1 (10Gbps) > AT+QCFG=\"usbspeed\",\"312\"": "AT+QCFG=\"usbspeed\",\"312\""
-            },
-            {
-                "Reset Module > AT+QCFG=\"ResetFactory\"": "AT+QCFG=\"ResetFactory\""
-            }
+            {"Module Info > ATI": "ATI"},
+            {"Query RF State > AT+CFUN?": "AT+CFUN?"},
+            {"Enable RF / Power On > AT+CFUN=1": "AT+CFUN=1"},
+            {"Minimum Function Mode > AT+CFUN=0": "AT+CFUN=0"},
+            {"Restart Module > AT+CFUN=1,1": "AT+CFUN=1,1"},
+            {"Query SIM Status > AT+CPIN?": "AT+CPIN?"},
+            {"Query Operator > AT+COPS?": "AT+COPS?"},
+            {"Query 5G Registration > AT+C5GREG?": "AT+C5GREG?"},
+            {"Query LTE Registration > AT+CEREG?": "AT+CEREG?"},
+            {"Query CS Domain Registration > AT+CREG?": "AT+CREG?"},
+            {"Query PS Domain Registration > AT+CGREG?": "AT+CGREG?"},
+            {"Query Attach State > AT+CGATT?": "AT+CGATT?"},
+            {"Attach Network > AT+CGATT=1": "AT+CGATT=1"},
+            {"Detach Network > AT+CGATT=0": "AT+CGATT=0"},
+            {"Query PDP Context > AT+CGDCONT?": "AT+CGDCONT?"},
+            {"Query Current PDP Info > AT+CGCONTRDP": "AT+CGCONTRDP"},
+            {"Query PDP Activation Status > AT+CGACT?": "AT+CGACT?"},
+            {"Activate PDP Context > AT+CGACT=1,<cid>": "AT+CGACT=1,<cid>"},
+            {"Deactivate PDP Context > AT+CGACT=0,<cid>": "AT+CGACT=0,<cid>"},
+            {"Query PDP Address > AT+CGPADDR=<cid>": "AT+CGPADDR=<cid>"},
+            {"Query Signal Strength > AT+CSQ": "AT+CSQ"},
+            {"Query Battery Status > AT+CBC": "AT+CBC"},
+            {"Query Thermal Status > AT+CEITHERM?": "AT+CEITHERM?"},
+            {"Query Last Error Cause > AT+CEER": "AT+CEER"},
+            {"Query Manufacturer > AT+GMI": "AT+GMI"},
+            {"Query Model > AT+GMM": "AT+GMM"},
+            {"Query Firmware Revision > AT+GMR": "AT+GMR"},
+            {"Query IMEI > AT+GSN": "AT+GSN"},
+            {"Query IMEI (Alternative) > AT+CGSN": "AT+CGSN"},
+            {"Query IMSI > AT+CIMI": "AT+CIMI"},
+            {"Query ICCID > AT+ICCID": "AT+ICCID"},
+            {"Query Phone Number > AT+CNUM": "AT+CNUM"},
+            {"Query Current Calls > AT+CLCC": "AT+CLCC"},
+            {"Query Device Activity Status > AT+CPAS": "AT+CPAS"},
+            {"Query SMS Format > AT+CMGF?": "AT+CMGF?"},
+            {"Set SMS Format to Text > AT+CMGF=1": "AT+CMGF=1"},
+            {"Set SMS Format to PDU > AT+CMGF=0": "AT+CMGF=0"},
+            {"Query Remaining PIN/PUK Attempts > AT+CPINR?": "AT+CPINR?"},
+            {"Query Module Time > AT+CCLK?": "AT+CCLK?"},
+            {"Enable Network Time Sync > AT+CTZU=1": "AT+CTZU=1"},
+            {"Disable Network Time Sync > AT+CTZU=0": "AT+CTZU=0"},
+            {"Query Time Sync Status > AT+CTZU?": "AT+CTZU?"},
+            {"Query Error Report Mode > AT+CMEE?": "AT+CMEE?"},
+            {"Set Detailed Error Report > AT+CMEE=2": "AT+CMEE=2"},
+            {"Query Character Set > AT+CSCS?": "AT+CSCS?"}
         ]
     },
     "fibocom": {
