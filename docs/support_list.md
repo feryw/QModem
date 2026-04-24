@@ -120,3 +120,8 @@ n510m | unisoc |✔ usb(ecm) | ✘
 Model | Platform | USB  | PCIe 
 --- | --- | --- | ---
 me3630-w | lte |✔ usb(ecm) | ✘
+
+# compal
+Model | Platform | USB  | PCIe 
+--- | --- | --- | ---
+rxm-g1 | qualcomm | ✘ | ✔ pcie(qmi,gobinet,mbim)

@@ -1,6 +1,7 @@
 {
     "tdtech" : "tdtech.sh",
     "quectel" : "quectel.sh",
+    "compal" : "compal.sh",
     "fibocom" : "fibocom.sh",
     "meig" : "meig.sh",
     "sierra" : "sierra.sh",

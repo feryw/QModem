@@ -649,6 +649,9 @@ msgstr "制造商"
 msgid "Quectel"
 msgstr "移远"
 
+msgid "Compal"
+msgstr "仁宝"
+
 msgid "Sierra Wireless"
 msgstr "Sierra无线"
 

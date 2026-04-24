@@ -282,6 +282,171 @@
             }
         ]
     },
+    "compal": {
+        "qualcomm": [
+            {
+                "SIM Card Status Report > AT+QSIMSTAT?": "AT+QSIMSTAT?"
+            },
+            {
+                "Set Current SIM to Slot 1 > AT+QUIMSLOT=1": "AT+QUIMSLOT=1"
+            },
+            {
+                "Set Current SIM to Slot 2 > AT+QUIMSLOT=2": "AT+QUIMSLOT=2"
+            },
+            {
+                "Query Network Information > AT+QNWINFO": "AT+QNWINFO"
+            },
+            {
+                "Query Carrier Aggregation Parameters > AT+QCAINFO": "AT+QCAINFO"
+            },
+            {
+                "Query 5G Signal Strength (RSRP) > AT+QRSRP": "AT+QRSRP"
+            },
+            {
+                "Query Current Dial Mode > AT+QCFG=\"usbnet\"": "AT+QCFG=\"usbnet\""
+            },
+            {
+                "QMI/GobiNet Dial Mode > AT+QCFG=\"usbnet\",0": "AT+QCFG=\"usbnet\",0"
+            },
+            {
+                "ECM Dial Mode > AT+QCFG=\"usbnet\",1": "AT+QCFG=\"usbnet\",1"
+            },
+            {
+                "MBIM Dial Mode > AT+QCFG=\"usbnet\",2": "AT+QCFG=\"usbnet\",2"
+            },
+            {
+                "RNDIS Dial Mode > AT+QCFG=\"usbnet\",3": "AT+QCFG=\"usbnet\",3"
+            },
+            {
+                "NCM Dial Mode > AT+QCFG=\"usbnet\",5": "AT+QCFG=\"usbnet\",5"
+            },
+            {
+                "Lock to 4G > AT+QNWPREFCFG=\"mode_pref\",LTE": "AT+QNWPREFCFG=\"mode_pref\",LTE"
+            },
+            {
+                "Lock to 5G > AT+QNWPREFCFG=\"mode_pref\",NR5G": "AT+QNWPREFCFG=\"mode_pref\",NR5G"
+            },
+            {
+                "Lock to 5G NSA > AT+QNWPREFCFG=\"mode_pref\",NR5G-NSA": "AT+QNWPREFCFG=\"mode_pref\",NR5G-NSA"
+            },
+            {
+                "Lock to 5G SA > AT+QNWPREFCFG=\"mode_pref\",NR5G-SA": "AT+QNWPREFCFG=\"mode_pref\",NR5G-SA"
+            },
+            {
+                "Restore Automatic Network Search > AT+QNWPREFCFG=\"mode_pref\",AUTO": "AT+QNWPREFCFG=\"mode_pref\",AUTO"
+            },
+            {
+                "Query Module IMEI > AT+EGMR=0,7": "AT+EGMR=0,7"
+            },
+            {
+                "Change Module IMEI > AT+EGMR=1,7,\"IMEI\"": "AT+EGMR=1,7,\"Set IMEI here\""
+            },
+            {
+                "Get Module Temperature > AT+QTEMP": "AT+QTEMP"
+            },
+            {
+                "Switch to USB Communication Port > AT+QCFG=\"data_interface\",0,0": "AT+QCFG=\"data_interface\",0,0"
+            },
+            {
+                "Switch to PCIE Communication Port > AT+QCFG=\"data_interface\",1,0": "AT+QCFG=\"data_interface\",1,0"
+            },
+            {
+                "Check Current USB Speed > AT+QCFG=\"usbspeed\"": "AT+QCFG=\"usbspeed\""
+            },
+            {
+                "Switch to USB2.0 > AT+QCFG=\"usbspeed\",\"20\"": "AT+QCFG=\"usbspeed\",\"20\""
+            },
+            {
+                "Switch to USB3.1 Gen1 (5Gbps) > AT+QCFG=\"usbspeed\",\"311\"": "AT+QCFG=\"usbspeed\",\"311\""
+            },
+            {
+                "Switch to USB3.1 Gen1 (10Gbps) > AT+QCFG=\"usbspeed\",\"312\"": "AT+QCFG=\"usbspeed\",\"312\""
+            },
+            {
+                "Reset Module > AT+QCFG=\"ResetFactory\"": "AT+QCFG=\"ResetFactory\""
+            }
+        ],
+        "general": [
+            {
+                "SIM Card Status Report > AT+QSIMSTAT?": "AT+QSIMSTAT?"
+            },
+            {
+                "Set Current SIM to Slot 1 > AT+QUIMSLOT=1": "AT+QUIMSLOT=1"
+            },
+            {
+                "Set Current SIM to Slot 2 > AT+QUIMSLOT=2": "AT+QUIMSLOT=2"
+            },
+            {
+                "Query Network Information > AT+QNWINFO": "AT+QNWINFO"
+            },
+            {
+                "Query Carrier Aggregation Parameters > AT+QCAINFO": "AT+QCAINFO"
+            },
+            {
+                "Query Current Dial Mode > AT+QCFG=\"usbnet\"": "AT+QCFG=\"usbnet\""
+            },
+            {
+                "QMI/GobiNet Dial Mode > AT+QCFG=\"usbnet\",0": "AT+QCFG=\"usbnet\",0"
+            },
+            {
+                "ECM Dial Mode > AT+QCFG=\"usbnet\",1": "AT+QCFG=\"usbnet\",1"
+            },
+            {
+                "MBIM Dial Mode > AT+QCFG=\"usbnet\",2": "AT+QCFG=\"usbnet\",2"
+            },
+            {
+                "RNDIS Dial Mode > AT+QCFG=\"usbnet\",3": "AT+QCFG=\"usbnet\",3"
+            },
+            {
+                "NCM Dial Mode > AT+QCFG=\"usbnet\",5": "AT+QCFG=\"usbnet\",5"
+            },
+            {
+                "Lock to 4G > AT+QNWPREFCFG=\"mode_pref\",LTE": "AT+QNWPREFCFG=\"mode_pref\",LTE"
+            },
+            {
+                "Lock to 5G > AT+QNWPREFCFG=\"mode_pref\",NR5G": "AT+QNWPREFCFG=\"mode_pref\",NR5G"
+            },
+            {
+                "Lock to 5G NSA > AT+QNWPREFCFG=\"mode_pref\",NR5G-NSA": "AT+QNWPREFCFG=\"mode_pref\",NR5G-NSA"
+            },
+            {
+                "Lock to 5G SA > AT+QNWPREFCFG=\"mode_pref\",NR5G-SA": "AT+QNWPREFCFG=\"mode_pref\",NR5G-SA"
+            },
+            {
+                "Restore Automatic Network Search > AT+QNWPREFCFG=\"mode_pref\",AUTO": "AT+QNWPREFCFG=\"mode_pref\",AUTO"
+            },
+            {
+                "Query Module IMEI > AT+EGMR=0,7": "AT+EGMR=0,7"
+            },
+            {
+                "Change Module IMEI > AT+EGMR=1,7,\"IMEI\"": "AT+EGMR=1,7,\"Set IMEI here\""
+            },
+            {
+                "Get Module Temperature > AT+QTEMP": "AT+QTEMP"
+            },
+            {
+                "Switch to USB Communication Port > AT+QCFG=\"data_interface\",0,0": "AT+QCFG=\"data_interface\",0,0"
+            },
+            {
+                "Switch to PCIE Communication Port > AT+QCFG=\"data_interface\",1,0": "AT+QCFG=\"data_interface\",1,0"
+            },
+            {
+                "Check Current USB Speed > AT+QCFG=\"usbspeed\"": "AT+QCFG=\"usbspeed\""
+            },
+            {
+                "Switch to USB2.0 > AT+QCFG=\"usbspeed\",\"20\"": "AT+QCFG=\"usbspeed\",\"20\""
+            },
+            {
+                "Switch to USB3.1 Gen1 (5Gbps) > AT+QCFG=\"usbspeed\",\"311\"": "AT+QCFG=\"usbspeed\",\"311\""
+            },
+            {
+                "Switch to USB3.1 Gen1 (10Gbps) > AT+QCFG=\"usbspeed\",\"312\"": "AT+QCFG=\"usbspeed\",\"312\""
+            },
+            {
+                "Reset Module > AT+QCFG=\"ResetFactory\"": "AT+QCFG=\"ResetFactory\""
+            }
+        ]
+    },
     "fibocom": {
         "qualcomm": [
             {

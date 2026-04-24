@@ -2,6 +2,7 @@ return {
     manufacturers = {
         gosuncn = "GosunCN",
         quectel = "Quectel",
+        compal = "Compal",
         simcom = "Simcom",
         sierra = "Sierra Wireless",
         fibocom = "Fibocom",
