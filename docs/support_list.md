@@ -71,6 +71,8 @@ fm190w-gl | qualcomm |✔ usb(qmi,gobinet,ecm,mbim,rndis,ncm) | ✔ pcie(qmi)
 l610-eu | unisoc |✔ usb(ecm,rndis,ncm) | ✘
 nl668 | lte |✔ usb(ecm,rndis,ncm) | ✘
 nl678 | lte |✔ usb(qmi,ecm,rndis,ncm) | ✘
+l8x0-gl-ncm | intel |✔ usb(ncm) | ✘
+l850-gl-mbim | intel |✔ usb(mbim) | ✘
 
 # meig
 Model | Platform | USB  | PCIe 
@@ -91,6 +93,7 @@ mc7355 | lte |✔ usb(qmi) | ✘
 Model | Platform | USB  | PCIe 
 --- | --- | --- | ---
 fn990a40 | qualcomm |✔ usb(mbim,rndis,qmi,ecm) | ✔ pcie(mbim,qmi)
+ln960 | qualcomm |✔ usb(qmi,mbim) | ✘
 
 # simcom
 Model | Platform | USB  | PCIe 
@@ -107,6 +110,7 @@ simcom_sim8380g-m2 | qualcomm |✔ usb(qmi,rndis) | ✔ pcie(qmi)
 Model | Platform | USB  | PCIe 
 --- | --- | --- | ---
 t77w968 | qualcomm |✔ usb(qmi,mbim) | ✘
+dw5821e | qualcomm |✔ usb(qmi,mbim) | ✘
 t99w175 | qualcomm |✔ usb(mbim,rmnet) | ✔ pcie(mbim)
 t99w373 | qualcomm |✔ usb(mbim,rmnet) | ✔ pcie(mbim)
 t99w640 | qualcomm |✘ | ✔ pcie(mbim)
