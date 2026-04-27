@@ -951,7 +951,7 @@
                     "ncm"
                 ]
             },
-            "l850-gl": {
+            "l8x0-gl-ncm": {
                 "id": "8087:095a",
                 "manufacturer_id": "8087",
                 "manufacturer": "fibocom",
@@ -964,6 +964,21 @@
                 "sa_band": "0",
                 "modes": [
                     "ncm"
+                ]
+            },
+            "l850-gl-mbim": {
+                "id": "2cb7:0007",
+                "manufacturer_id": "2cb7",
+                "manufacturer": "fibocom",
+                "platform": "intel",
+                "data_interface": "usb",
+                "pdp_index": "0",
+                "wcdma_band": "1/2/4/5/8",
+                "lte_band": "1/2/3/4/5/7/8/12/13/17/18/19/20/25/26/28/66",
+                "nsa_band": "0",
+                "sa_band": "0",
+                "modes": [
+                    "mbim"
                 ]
             },
             "srm815": {
@@ -1225,6 +1240,38 @@
             "t77w968": {
                 "manufacturer_id": "413c",
                 "manufacturer": "foxconn",
+                "platform": "qualcomm",
+                "data_interface": "usb",
+                "pdp_index": "1",
+                "wcdma_band": "1/2/4/5/6/8/19",
+                "lte_band": "1/2/3/4/5/7/8/12/13/14/17/18/19/20/25/26/28/29/30/32/38/39/40/41/42/43/46/66",
+                "nsa_band": "0",
+                "sa_band": "0",
+                "modes": [
+                    "qmi",
+                    "mbim"
+                ]
+            },
+            "dw5821e": {
+                "id": "413c:81d7",
+                "manufacturer_id": "413c",
+                "manufacturer": "foxconn",
+                "platform": "qualcomm",
+                "data_interface": "usb",
+                "pdp_index": "1",
+                "wcdma_band": "1/2/4/5/6/8/19",
+                "lte_band": "1/2/3/4/5/7/8/12/13/14/17/18/19/20/25/26/28/29/30/32/38/39/40/41/42/43/46/66",
+                "nsa_band": "0",
+                "sa_band": "0",
+                "modes": [
+                    "qmi",
+                    "mbim"
+                ]
+            },
+            "ln960": {
+                "id": "1bc7:1910",
+                "manufacturer_id": "1bc7",
+                "manufacturer": "telit",
                 "platform": "qualcomm",
                 "data_interface": "usb",
                 "pdp_index": "1",
@@ -1837,10 +1884,13 @@
                 },
                 "intel": {
                     "vendor_id": [
-                        "8087"
+                        "8087",
+                        "2cb7"
                     ],
                     "product_id": [
-                        "095a"
+                        "095a",
+                        "0007",
+                        "000b"
                     ]
                 }
             },
@@ -1944,7 +1994,8 @@
                         "1bc7"
                     ],
                     "product_id": [
-                        "1075"
+                        "1075",
+                        "1910"
                     ]
                 }
             }
