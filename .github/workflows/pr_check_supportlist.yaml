@@ -4,8 +4,6 @@ on:
     # only run when "luci/luci-app-qmodem/root/usr/share/qmodem/modem_support.json" is changed
     paths:
       - 'application/qmodem/files/usr/share/qmodem/modem_support.json'
-permissions:
-  contents: write
 env:
   TZ: Asia/Jakarta
 jobs:
@@ -31,7 +29,7 @@ jobs:
           run: |
             cd pr_branch
             is_json_invalid=0
-            python3 ./scripts/update_support_list.py temp_support_list ./application/qmodem/files/usr/share/qmodem/modem_support.json || is_json_invalid=1   
+            python3 ./scripts/update_support_list.py temp_support_list ./application/qmodem/files/usr/share/qmodem/modem_support.json || is_json_invalid=1
             if [ "$is_json_invalid" = "1" ]; then
               echo "pr_close=1" >> $GITHUB_OUTPUT
               echo "The JSON file is invalid, please check" >> pr_comment.txt
@@ -48,7 +46,7 @@ jobs:
             echo '```' > ./pr_comment.txt
             diff -u ./temp_support_list.md ../base_branch/docs/support_list.md >> ./pr_comment.txt || true
             echo '```' >> ./pr_comment.txt
-            if [ "$is_diff" = "1" ]; then 
+            if [ "$is_diff" = "1" ]; then
               echo "The support list has been updated, please check the changes" >> ./pr_comment.txt
               echo "pr_close=0" >> $GITHUB_OUTPUT
               echo "has_diff=1" >> $GITHUB_OUTPUT
