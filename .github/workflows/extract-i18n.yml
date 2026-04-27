@@ -1,3 +1,4 @@
+---
 name: Extract i18n Strings
 
 on:
@@ -14,19 +15,20 @@ on:
       - 'luci/luci-app-qmodem-next/htdocs/luci-static/resources/**'
 permissions:
   contents: write
+
 jobs:
   extract-i18n:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
-          
+
       - name: Extract i18n strings
         run: |
           python3 scripts/extract_i18n_strings.py \
@@ -34,12 +36,12 @@ jobs:
             --js-path luci/luci-app-qmodem-next/htdocs/luci-static/resources \
             --format po \
             --output luci/luci-app-qmodem-next/po/template/qmodem-next.po
-            
+
       - name: Check for changes
         id: git-check
         run: |
           git diff --exit-code luci/luci-app-qmodem-next/po/template/qmodem-next.po || echo "changed=true" >> $GITHUB_OUTPUT
-          
+
       - name: Commit and push if changed
         if: steps.git-check.outputs.changed == 'true' && github.event_name == 'push'
         run: |

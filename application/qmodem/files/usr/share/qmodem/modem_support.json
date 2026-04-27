@@ -1252,7 +1252,7 @@
                     "mbim"
                 ]
             },
-            "dw5821e": {
+            "dell_dw5821e": {
                 "id": "413c:81d7",
                 "manufacturer_id": "413c",
                 "manufacturer": "foxconn",
@@ -1268,7 +1268,7 @@
                     "mbim"
                 ]
             },
-            "ln960": {
+            "telit_ln960": {
                 "id": "1bc7:1910",
                 "manufacturer_id": "1bc7",
                 "manufacturer": "telit",
