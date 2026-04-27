@@ -94,6 +94,8 @@ Model | Platform | USB  | PCIe
 --- | --- | --- | ---
 fn990a40 | qualcomm |✔ usb(mbim,rndis,qmi,ecm) | ✔ pcie(mbim,qmi)
 ln960 | qualcomm |✔ usb(qmi,mbim) | ✘
+ln940-mbim | qualcomm |✔ usb(mbim) | ✘
+ln940-qmi | qualcomm |✔ usb(qmi) | ✘
 
 # simcom
 Model | Platform | USB  | PCIe 
@@ -113,6 +115,9 @@ t77w968 | qualcomm |✔ usb(qmi,mbim) | ✘
 dw5821e | qualcomm |✔ usb(qmi,mbim) | ✘
 t99w175 | qualcomm |✔ usb(mbim,rmnet) | ✔ pcie(mbim)
 t99w373 | qualcomm |✔ usb(mbim,rmnet) | ✔ pcie(mbim)
+t77w676 | qualcomm |✔ usb(qmi,mbim) | ✘
+lt4220-mbim | qualcomm |✔ usb(mbim) | ✘
+lt4220-qmi | qualcomm |✔ usb(qmi) | ✘
 t99w640 | qualcomm |✘ | ✔ pcie(mbim)
 
 # neoway
