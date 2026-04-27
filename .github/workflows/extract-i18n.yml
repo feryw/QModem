@@ -4,8 +4,7 @@ name: Extract i18n Strings
 on:
   push:
     branches:
-      - main
-      - master
+      - ms
     paths:
       - 'application/qmodem/files/usr/share/qmodem/**'
       - 'luci/luci-app-qmodem-next/htdocs/luci-static/resources/**'

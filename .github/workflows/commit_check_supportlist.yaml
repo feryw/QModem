@@ -3,7 +3,7 @@ name: "Update Support List"
 on:
   push:
     branches:
-      - 'main'
+      - 'ms'
     # only run when "luci/luci-app-qmodem/root/usr/share/qmodem/modem_support.json" is changed
     paths:
       - 'application/qmodem/files/usr/share/qmodem/modem_support.json'

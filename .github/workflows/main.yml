@@ -13,7 +13,7 @@ on:
       - "README.en.md"
   pull_request:
     branches:
-      - main
+      - ms
     paths-ignore:
       - "docs/**"
       - "README*.md"
@@ -28,7 +28,7 @@ jobs:
   job_auto_tag:
     runs-on: ubuntu-latest
     # 只在 main 分支推送且包含 version.mk 文件变更时运行
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.ref == 'refs/heads/ms' && github.event_name == 'push'
     outputs:
       new_tag: ${{ steps.create_tag.outputs.tag_name }}
       tag_created: ${{ steps.create_tag.outputs.tag_created }}
