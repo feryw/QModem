@@ -236,6 +236,8 @@ jobs:
             make package/$package/compile -j$(nproc) || true
           done
           ls bin/packages/${{ env.SDK_ARCH }}/qmodem/
+          echo "bin/packages content"
+          find bin/packages
           echo "status=success" >> $GITHUB_OUTPUT
           echo "FIRMWARE=$(pwd)/bin/packages/${{ env.SDK_ARCH }}/qmodem/" >> $GITHUB_ENV
 
