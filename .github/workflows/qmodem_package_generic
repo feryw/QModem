@@ -3,3 +3,4 @@ luci-app-qmodem-sms
 luci-app-qmodem-next
 luci-app-qmodem-monitor
 qmodem
+qmodem-monitor
