@@ -4,4 +4,4 @@ luci-app-qmodem-next
 luci-app-qmodem-monitor
 qmodem
 qmodem-monitor
-sms-forwarder-next
+sms_forwarder_next
