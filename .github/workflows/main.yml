@@ -187,8 +187,10 @@ jobs:
         uses: actions/cache@v3
         with:
           path: sdk
-          key: openwrt-sdk-${{ matrix.build_arch }}-24.10-v3
-
+          key: openwrt-sdk-${{ matrix.build_arch }}
+          restore-keys: |
+            openwrt-sdk-${{ matrix.build_arch }}-
+            
       - name: Initialization environment
         if: steps.cache-sdk.outputs.cache-hit != 'true'
         env:
