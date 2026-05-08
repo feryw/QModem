@@ -35,7 +35,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -140,7 +140,7 @@ jobs:
             echo "is_pr=${is_pr}" >> $GITHUB_OUTPUT
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v6
         with:
           path: 'qmodem'
 
@@ -175,7 +175,7 @@ jobs:
           sudo -E apt-get -qq clean
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v6
         with:
           path: 'qmodem'
 
