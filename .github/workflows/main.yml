@@ -247,7 +247,7 @@ jobs:
         with:
           name: QModem-${{ matrix.build_arch }}
           path: ${{ env.FIRMWARE }}*
-          retention-days: 7
+          # retention-days: 7
 
   job_release_artifacts:
     name: Release Artifacts
