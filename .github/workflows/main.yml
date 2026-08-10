@@ -1,6 +1,15 @@
 name: "Auto compile with OpenWrt SDK"
 on:
   workflow_dispatch:
+    inputs:
+      force_release:
+        description: 'Force create a release regardless of push type (branch/tag)'
+        type: boolean
+        default: false
+      release_tag:
+        description: 'Tag name to use for forced release (leave empty to auto-detect from version.mk, e.g. v1.2.3)'
+        type: string
+        default: ''
   push:
     branches:
       - '*'
@@ -114,10 +123,29 @@ jobs:
         run: |
           echo "build_date=$(date +'%Y%m%d_%H%M%S')" >> $GITHUB_OUTPUT
 
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          path: 'qmodem'
+
       - name: Determine push type
         id: determine_push
         run: |
-          if [[ "${{ needs.job_auto_tag.outputs.tag_created }}" == "true" ]]; then
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" && "${{ inputs.force_release }}" == "true" ]]; then
+            echo "Force release requested via manual dispatch"
+            tag_name="${{ inputs.release_tag }}"
+            if [ -z "$tag_name" ]; then
+              version=$(grep "^QMODEM_VERSION" qmodem/version.mk | sed 's/QMODEM_VERSION:=//' | xargs)
+              if [ -z "$version" ]; then
+                echo "Error: no release_tag given and could not read version from version.mk"
+                exit 1
+              fi
+              tag_name="v$version"
+              echo "No release_tag input given, derived tag from version.mk: $tag_name"
+            fi
+            echo "tag_name=${tag_name}" >> $GITHUB_OUTPUT
+            echo "push_type=tag" >> $GITHUB_OUTPUT
+          elif [[ "${{ needs.job_auto_tag.outputs.tag_created }}" == "true" ]]; then
             echo "New tag created: ${{ needs.job_auto_tag.outputs.new_tag }}"
             echo "tag_name=${{ needs.job_auto_tag.outputs.new_tag }}" >> $GITHUB_OUTPUT
             echo "push_type=tag" >> $GITHUB_OUTPUT
@@ -132,11 +160,6 @@ jobs:
           fi
           is_pr=$([[ "${{ github.event_name }}" == "pull_request" ]] && echo 1 || echo 0)
           echo "is_pr=${is_pr}" >> $GITHUB_OUTPUT
-
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          path: 'qmodem'
 
       - name: Generate Release Note
         id: update_modem_support_list
