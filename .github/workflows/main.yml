@@ -187,7 +187,7 @@ jobs:
 
       - name: Cache openwrt SDK
         id: cache-sdk
-        uses: actions/cache@v3
+        uses: actions/cache@v6
         with:
           path: sdk
           key: openwrt-sdk-${{ matrix.build_arch }}
@@ -243,7 +243,7 @@ jobs:
 
       - name: Upload QModem Artifact
         if: ${{ steps.compile.outputs.status == 'success' }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: QModem-${{ matrix.build_arch }}-${{ needs.job_prepare.outputs.build_date }}
           path: ${{ env.FIRMWARE }}*
@@ -259,13 +259,13 @@ jobs:
       !contains(needs.*.result, 'cancelled')
     steps:
       - name: Download all build artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         continue-on-error: true
         with:
           path: artifacts
 
       - name: Download Release Note
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         continue-on-error: true
         with:
           name: Release Note
@@ -297,7 +297,7 @@ jobs:
           done
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2.2.2
+        uses: softprops/action-gh-release@v3
         with:
           body_path: release_note/release_note.md
           generate_release_notes: true
