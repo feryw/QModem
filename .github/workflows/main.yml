@@ -1,4 +1,3 @@
----
 name: "Auto compile with OpenWrt SDK"
 on:
   workflow_dispatch:
@@ -27,7 +26,6 @@ env:
 jobs:
   job_auto_tag:
     runs-on: ubuntu-latest
-    # 只在 main 分支推送且包含 version.mk 文件变更时运行
     if: github.ref == 'refs/heads/ms' && github.event_name == 'push'
     outputs:
       new_tag: ${{ steps.create_tag.outputs.tag_name }}
@@ -43,7 +41,6 @@ jobs:
       - name: Check if version.mk changed
         id: check_version_change
         run: |
-          # 检查version.mk是否在这次提交中被修改
           if git diff --name-only HEAD~1 HEAD | grep -q "^version\.mk$"; then
             echo "version.mk was modified in this commit"
             echo "version_changed=true" >> $GITHUB_OUTPUT
@@ -56,18 +53,15 @@ jobs:
         id: extract_version
         if: steps.check_version_change.outputs.version_changed == 'true'
         run: |
-          # 从version.mk文件中提取QMODEM_VERSION
           version=$(grep "^QMODEM_VERSION" version.mk | sed 's/QMODEM_VERSION:=//' | xargs)
           echo "Current QMODEM_VERSION: $version"
           echo "version=$version" >> $GITHUB_OUTPUT
 
-          # 检查version是否为空
           if [ -z "$version" ]; then
             echo "Error: Could not extract version from version.mk"
             exit 1
           fi
 
-          # 生成tag名称
           tag_name="v$version"
           echo "tag_name=$tag_name" >> $GITHUB_OUTPUT
           echo "Generated tag name: $tag_name"
@@ -78,7 +72,6 @@ jobs:
         run: |
           tag_name="${{ steps.extract_version.outputs.tag_name }}"
 
-          # 检查tag是否已经存在
           if git tag -l | grep -q "^${tag_name}$"; then
             echo "Tag $tag_name already exists, skipping tag creation"
             echo "tag_exists=true" >> $GITHUB_OUTPUT
@@ -94,14 +87,10 @@ jobs:
           tag_name="${{ steps.extract_version.outputs.tag_name }}"
           version="${{ steps.extract_version.outputs.version }}"
 
-          # 配置git用户信息
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # 创建带注释的tag
           git tag -a "$tag_name" -m "Release version $version - Auto-generated tag when QMODEM_VERSION was updated to $version"
-
-          # 推送tag到远程仓库
           git push origin "$tag_name"
 
           echo "✅ Successfully created and pushed tag: $tag_name"
@@ -111,33 +100,38 @@ jobs:
   job_prepare:
     runs-on: ubuntu-latest
     needs: [job_auto_tag]
-    if: always()  # 总是运行，不管 auto_tag 是否运行或是否成功
+    if: always()
     outputs:
       branch_name: ${{ steps.determine_push.outputs.branch_name }}
       tag_name: ${{ steps.determine_push.outputs.tag_name }}
       push_type: ${{ steps.determine_push.outputs.push_type }}
       is_pr: ${{ steps.determine_push.outputs.is_pr }}
+      build_date: ${{ steps.get_date.outputs.build_date }}
 
     steps:
+      - name: Generate Build Timestamp
+        id: get_date
+        run: |
+          echo "build_date=$(date +'%Y%m%d_%H%M%S')" >> $GITHUB_OUTPUT
+
       - name: Determine push type
         id: determine_push
         run: |
-            # 如果 auto_tag job 创建了新标签，使用新标签
-            if [[ "${{ needs.job_auto_tag.outputs.tag_created }}" == "true" ]]; then
-              echo "New tag created: ${{ needs.job_auto_tag.outputs.new_tag }}"
-              echo "tag_name=${{ needs.job_auto_tag.outputs.new_tag }}" >> $GITHUB_OUTPUT
-              echo "push_type=tag" >> $GITHUB_OUTPUT
-            elif [[ "${{ github.ref }}" == refs/tags/* ]]; then
-              echo "This is a tag push."
-              echo "tag_name=${{ github.ref_name }}" >> $GITHUB_OUTPUT
-              echo "push_type=tag" >> $GITHUB_OUTPUT
-            else
-              echo "This is a branch push."
-              echo "branch_name=${{ github.ref_name }}" >> $GITHUB_OUTPUT
-              echo "push_type=branch" >> $GITHUB_OUTPUT
-            fi
-            is_pr=$([[ "${{ github.event_name }}" == "pull_request" ]] && echo 1 || echo 0)
-            echo "is_pr=${is_pr}" >> $GITHUB_OUTPUT
+          if [[ "${{ needs.job_auto_tag.outputs.tag_created }}" == "true" ]]; then
+            echo "New tag created: ${{ needs.job_auto_tag.outputs.new_tag }}"
+            echo "tag_name=${{ needs.job_auto_tag.outputs.new_tag }}" >> $GITHUB_OUTPUT
+            echo "push_type=tag" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            echo "This is a tag push."
+            echo "tag_name=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+            echo "push_type=tag" >> $GITHUB_OUTPUT
+          else
+            echo "This is a branch push."
+            echo "branch_name=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+            echo "push_type=branch" >> $GITHUB_OUTPUT
+          fi
+          is_pr=$([[ "${{ github.event_name }}" == "pull_request" ]] && echo 1 || echo 0)
+          echo "is_pr=${is_pr}" >> $GITHUB_OUTPUT
 
       - name: Checkout
         uses: actions/checkout@v6
@@ -163,8 +157,17 @@ jobs:
     needs: [job_prepare]
     continue-on-error: true
     strategy:
+      fail-fast: false
       matrix:
-        build_arch: ["aarch64-cortex-a53_ipk", "aarch64-cortex-a53_apk", "aarch64-cortex-a72_ipk", "aarch64-cortex-a72_apk", "aarch64-cortex-a76_ipk", "aarch64-cortex-a76_apk", "x86-64_apk", "x86-64_ipk", "mipsel-24kc_ipk", "mipsel-24kc_apk", "aarch64-generic-armv8_ipk", "aarch64-generic-armv8_apk", "armv7_ipk"]
+        build_arch: [
+          "aarch64-cortex-a53_ipk", "aarch64-cortex-a53_apk",
+          "aarch64-cortex-a72_ipk", "aarch64-cortex-a72_apk",
+          "aarch64-cortex-a76_ipk", "aarch64-cortex-a76_apk",
+          "x86-64_apk", "x86-64_ipk",
+          "mipsel-24kc_ipk", "mipsel-24kc_apk",
+          "aarch64-generic-armv8_ipk", "aarch64-generic-armv8_apk",
+          "armv7_ipk"
+        ]
     runs-on: ubuntu-latest
     steps:
       - name: Install packages
@@ -190,7 +193,7 @@ jobs:
           key: openwrt-sdk-${{ matrix.build_arch }}
           restore-keys: |
             openwrt-sdk-${{ matrix.build_arch }}-
-            
+
       - name: Initialization environment
         if: steps.cache-sdk.outputs.cache-hit != 'true'
         env:
@@ -215,7 +218,6 @@ jobs:
           echo "CONFIG_ALL_KMODS=n" >> .config
           echo "CONFIG_ALL=n" >> .config
           echo "CONFIG_AUTOREMOVE=n" >> .config
-          # echo "CONFIG_LUCI_LANG_zh_Hans=y" >> .config
           cat ../qmodem/.github/workflows/openwrt_package.config >> .config
           make defconfig
           make clean
@@ -236,32 +238,35 @@ jobs:
             make package/$package/compile -j$(nproc) || true
           done
           ls bin/packages/${{ env.SDK_ARCH }}/qmodem/
-          echo "bin/packages content"
-          find bin/packages
           echo "status=success" >> $GITHUB_OUTPUT
           echo "FIRMWARE=$(pwd)/bin/packages/${{ env.SDK_ARCH }}/qmodem/" >> $GITHUB_ENV
 
-      - name: Upload QModem
+      - name: Upload QModem Artifact
         if: ${{ steps.compile.outputs.status == 'success' }}
         uses: actions/upload-artifact@v4
         with:
-          name: QModem-${{ matrix.build_arch }}
+          name: QModem-${{ matrix.build_arch }}-${{ needs.job_prepare.outputs.build_date }}
           path: ${{ env.FIRMWARE }}*
-          # retention-days: 7
 
   job_release_artifacts:
     name: Release Artifacts
     needs: [job_build_qmodem, job_prepare]
     runs-on: ubuntu-latest
-    if: ${{ needs.job_prepare.outputs.push_type == 'tag' }}
+    if: |
+      always() &&
+      needs.job_prepare.outputs.push_type == 'tag' &&
+      needs.job_prepare.result == 'success' &&
+      !contains(needs.*.result, 'cancelled')
     steps:
-      - name: Download all artifacts
+      - name: Download all build artifacts
         uses: actions/download-artifact@v4
+        continue-on-error: true
         with:
           path: artifacts
 
       - name: Download Release Note
         uses: actions/download-artifact@v4
+        continue-on-error: true
         with:
           name: Release Note
           path: release_note
@@ -269,18 +274,30 @@ jobs:
       - name: Create releases directory
         run: mkdir -p releases
 
-      - name: Package artifacts into tar.gz
+      - name: Package artifacts into tar.gz with datetime
         run: |
+          BUILD_DATE="${{ needs.job_prepare.outputs.build_date }}"
+          [ -z "$BUILD_DATE" ] && BUILD_DATE=$(date +'%Y%m%d_%H%M%S')
+
           for dir in artifacts/*; do
             if [ -d "$dir" ]; then
               base_name=$(basename "$dir")
-              tar -czf "releases/${base_name}.tar.gz" -C "$dir" .
+              
+              # Skip non-build artifact directories
+              if [[ "$base_name" == "release_note" || "$base_name" == "Release Note" ]]; then
+                continue
+              fi
+
+              # Check if the folder contains files before compressing
+              if [ -n "$(ls -A "$dir")" ]; then
+                echo "Packaging $base_name..."
+                tar -czf "releases/${base_name}.tar.gz" -C "$dir" .
+              fi
             fi
           done
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2.2.2
-        if: ${{ needs.job_prepare.outputs.push_type == 'tag' }}
         with:
           body_path: release_note/release_note.md
           generate_release_notes: true
