@@ -35,7 +35,8 @@ env:
 jobs:
   job_auto_tag:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/ms' && github.event_name == 'push'
+    # Skipped entirely on manual force-release dispatch runs
+    if: github.ref == 'refs/heads/ms' && github.event_name == 'push' && github.event.inputs.force_release != 'true'
     outputs:
       new_tag: ${{ steps.create_tag.outputs.tag_name }}
       tag_created: ${{ steps.create_tag.outputs.tag_created }}
@@ -178,6 +179,8 @@ jobs:
   job_build_qmodem:
     name: Build QModem
     needs: [job_prepare]
+    # Skipped entirely on manual force-release dispatch runs
+    if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.force_release == true) }}
     continue-on-error: true
     strategy:
       fail-fast: false
